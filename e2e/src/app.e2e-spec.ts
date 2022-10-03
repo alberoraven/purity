@@ -7,8 +7,18 @@ describe('new App', () => {
     page = new AppPage();
   });
 
-  it('should display welcome message', () => {
+  it('should display the menu', () => {
     page.navigateTo();
-    expect(page.getPageTitle()).toContain('Tab 1');
+    expect(page.getMenu()).toBeTruthy();
+  });
+
+  it('should get the slides text', () => {
+    page.navigateTo();
+    expect(page.getFirstSlide()).toBe('swiper');
+  });
+
+  it('should create a router outlet', () => {
+    page.navigateTo();
+    expect(page.getRouter()).toBeTruthy();
   });
 });

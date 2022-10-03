@@ -1,11 +1,33 @@
-import { browser, by, element } from 'protractor';
+import { browser, by, element, ElementFinder, ExpectedConditions } from 'protractor';
 
 export class AppPage {
   navigateTo() {
     return browser.get('/');
   }
 
-  getPageTitle() {
-    return element(by.css('ion-title')).getText();
+  async getMenu() {
+    const el = this.getElement('app-root ion-menu');
+    await this.waitForSelector(el);
+    return el;
+  }
+
+  async getFirstSlide() {
+    const el = this.getElement('app-root swiper');
+    await this.waitForSelector(el);
+    return el.getTagName();
+  }
+
+  async getRouter() {
+    const el = this.getElement('app-root ion-router-outlet');
+    await this.waitForSelector(el);
+    return el;
+  }
+
+  async waitForSelector(el: ElementFinder) {
+    return browser.wait(ExpectedConditions.presenceOf(el), 3000);
+  }
+
+  getElement(selector) {
+    return element(by.css(selector));
   }
 }
