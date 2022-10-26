@@ -9,6 +9,7 @@ import { SplashScreen } from '@capacitor/splash-screen';
 
 import { Storage } from '@ionic/storage';
 
+
 import { UserData } from './providers/user-data';
 
 @Component({
@@ -42,7 +43,7 @@ export class AppComponent implements OnInit {
   ];
   loggedIn = false;
   dark = false;
-
+  
   constructor(
     private menu: MenuController,
     private platform: Platform,
@@ -117,7 +118,7 @@ export class AppComponent implements OnInit {
 
   logout() {
     this.userData.logout().then(() => {
-      return this.router.navigateByUrl('/app/tabs/schedule');
+      return this.router.navigateByUrl('/login');
     });
   }
 

@@ -85,3 +85,8 @@ ion-menu.ios ion-item ion-icon {
 ion-menu.ios ion-item.selected ion-icon {
   color: var(--ion-color-primary);
 }
+
+ion-split-pane {
+  --side-max-width: 18%;
+  --side-min-width: 250px;
+}

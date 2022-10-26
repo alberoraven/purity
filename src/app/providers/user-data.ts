@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Storage } from '@ionic/storage';
+import { nhost } from './global';
 
 
 @Injectable({
@@ -29,34 +30,37 @@ export class UserData {
     }
   }
 
-  login(username: string): Promise<any> {
+  login(userCredentials: object): Promise<any> {
     return this.storage.set(this.HAS_LOGGED_IN, true).then(() => {
-      this.setUsername(username);
+      this.setUserCredentials(userCredentials);
       return window.dispatchEvent(new CustomEvent('user:login'));
     });
   }
 
-  signup(username: string): Promise<any> {
+  signup(userCredentials: object): Promise<any> {
     return this.storage.set(this.HAS_LOGGED_IN, true).then(() => {
-      this.setUsername(username);
+      this.setUserCredentials(userCredentials);
       return window.dispatchEvent(new CustomEvent('user:signup'));
     });
   }
 
   logout(): Promise<any> {
-    return this.storage.remove(this.HAS_LOGGED_IN).then(() => {
-      return this.storage.remove('username');
-    }).then(() => {
-      window.dispatchEvent(new CustomEvent('user:logout'));
-    });
+    return nhost.auth.signOut().then(() => {
+      return this.storage.remove(this.HAS_LOGGED_IN).then(() => {
+        return this.storage.remove('userCredentials');
+      }).then(() => {
+        window.dispatchEvent(new CustomEvent('user:logout'));
+      });
+    })
+    
   }
 
-  setUsername(username: string): Promise<any> {
-    return this.storage.set('username', username);
+  setUserCredentials(userCredentials: object): Promise<any> {
+    return this.storage.set('userCredentials', userCredentials);
   }
 
-  getUsername(): Promise<string> {
-    return this.storage.get('username').then((value) => {
+  getUserCredentials(): Promise<object> {
+    return this.storage.get('userCredentials').then((value) => {
       return value;
     });
   }

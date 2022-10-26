@@ -5,6 +5,7 @@ import { AlertController, IonList, IonRouterOutlet, LoadingController, ModalCont
 import { ScheduleFilterPage } from '../schedule-filter/schedule-filter';
 import { ConferenceData } from '../../providers/conference-data';
 import { UserData } from '../../providers/user-data';
+import { nhost } from '../../providers/global';
 
 @Component({
   selector: 'page-schedule',
@@ -41,6 +42,10 @@ export class SchedulePage implements OnInit {
     this.updateSchedule();
 
     this.ios = this.config.get('mode') === 'ios';
+
+    setTimeout(() => {
+      this.user.login(nhost.auth.getUser());
+    });
   }
 
   updateSchedule() {

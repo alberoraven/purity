@@ -8,9 +8,9 @@
 </ion-header>
 
 <ion-content>
-  <div *ngIf="username" class="ion-padding-top ion-text-center">
-    <img src="https://www.gravatar.com/avatar?d=mm&s=140" alt="avatar">
-    <h2>{{username}}</h2>
+  <div *ngIf="userCredentials" class="ion-padding-top ion-text-center">
+    <img src="{{userCredentials.avatarUrl}}" alt="avatar">
+    <h2>{{userCredentials.displayName}}</h2>
 
     <ion-list inset>
       <ion-item (click)="updatePicture()">Update Picture</ion-item>
