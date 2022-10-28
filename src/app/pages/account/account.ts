@@ -1,9 +1,9 @@
 import { AfterViewInit, Component } from '@angular/core';
 import { Router } from '@angular/router';
-
 import { AlertController } from '@ionic/angular';
-
 import { UserData } from '../../providers/user-data';
+import { nhost } from '../../providers/global';
+import { Apollo, gql } from 'apollo-angular';
 
 
 @Component({
@@ -17,7 +17,8 @@ export class AccountPage implements AfterViewInit {
   constructor(
     public alertCtrl: AlertController,
     public router: Router,
-    public userData: UserData
+    public userData: UserData,
+    private apollo: Apollo
   ) { }
 
   ngAfterViewInit() {
@@ -54,6 +55,26 @@ export class AccountPage implements AfterViewInit {
       ]
     });
     await alert.present();
+    nhost.graphql.request(gql`
+      mutation MyQuery {
+          insert_Test(objects: [{name: "From Ionic app"}]) {
+            returning {
+              id
+              name
+              created_at
+            }
+        }
+      }
+    `);
+    nhost.graphql.request(gql`
+      query MyQuery {
+        Test {
+              name
+              status
+              id
+            }
+      }
+    `);
   }
 
   getUserCredentials() {
@@ -75,3 +96,14 @@ export class AccountPage implements AfterViewInit {
     this.router.navigateByUrl('/support');
   }
 }
+
+
+// mutation MyMutation {
+  // insert_Test(objects: [{name: "From Hasura"}]) {
+  //   returning {
+  //     id
+  //     name
+  //     created_at
+  //   }
+  // }
+// }
