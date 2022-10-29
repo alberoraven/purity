@@ -1,0 +1,64 @@
+<ion-header>
+    <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-menu-button></ion-menu-button>
+      </ion-buttons>
+      <ion-title>My Profile</ion-title>
+    </ion-toolbar>
+</ion-header>
+  
+<ion-content>
+    <ion-grid>
+        <legend class="ion-padding">PROFILE DETAILS</legend>
+        <ion-row>
+            <ion-col size="12">
+                <form [formGroup]="profileForm" (ngSubmit)="onProfileSubmit()">
+                    <ion-item>
+                        <ion-label position="stacked" color="primary">Username</ion-label>
+                        <ion-input formControlName="userName" id="userName" name="userName" type="text">
+                        </ion-input>
+                    </ion-item>
+                    <ion-item>
+                        <ion-label position="stacked" color="primary">Firstname</ion-label>
+                        <ion-input formControlName="firstName" id="firstName" name="firstName" type="text">
+                        </ion-input>
+                    </ion-item>
+                    <ion-item>
+                        <ion-label position="stacked" color="primary">Lastname</ion-label>
+                        <ion-input formControlName="lastName" id="lastName" name="lastName" type="text">
+                        </ion-input>
+                    </ion-item>
+                    <ion-item>
+                        <ion-label position="stacked" color="primary">Email</ion-label>
+                        <ion-input formControlName="email" id="email" name="email" type="email">
+                        </ion-input>
+                    </ion-item>
+                    <ion-item>
+                        <ion-label position="stacked" color="primary">Phone Number</ion-label>
+                        <ion-input formControlName="phone" id="phone" name="phone" type="text">
+                        </ion-input>
+                    </ion-item>
+                    <ion-item>
+                        <ion-label position="stacked" color="primary">Address</ion-label>
+                        <ion-input formControlName="address" id="address" name="address" type="text">
+                        </ion-input>
+                    </ion-item>
+                    <ion-item>
+                        <ion-label position="stacked" color="primary">City</ion-label>
+                        <ion-input formControlName="city" id="city" name="city" type="text">
+                        </ion-input>
+                    </ion-item>
+                    <ion-item>
+                        <ion-label position="stacked" color="primary">State</ion-label>
+                        <ion-input formControlName="state" id="state" name="state" type="text">
+                        </ion-input>
+                    </ion-item>
+                    <div class="ion-padding">
+                        <ion-button (click)="onProfileSubmit()" type="submit" expand="block" [disabled]="!profileForm.valid">Update Profile</ion-button>
+                    </div>
+                </form>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+</ion-content>
+  
