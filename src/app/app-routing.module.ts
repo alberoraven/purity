@@ -44,6 +44,10 @@ const routes: Routes = [
   {
     path: 'service',
     loadChildren: () => import('./pages/services/services.module').then(m => m.ServicesModule),
+  },
+  {
+    path: 'forget-password',
+    loadChildren: () => import('./pages/forget/forget.module').then(m => m.ForgetModule),
   }
 ];
 
