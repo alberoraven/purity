@@ -1,0 +1,58 @@
+<ion-content>
+    <ion-header class="ion-no-border">
+      <ion-toolbar>
+        <ion-buttons slot="start">
+          <ion-menu-button></ion-menu-button>
+        </ion-buttons>
+        <ion-buttons slot="end">
+          <ion-button (click)="presentPopover($event)">
+            <ion-icon slot="icon-only" ios="ellipsis-horizontal" md="ellipsis-vertical"></ion-icon>
+          </ion-button>
+        </ion-buttons>
+      </ion-toolbar>
+    </ion-header>
+  
+    <div class="pservice-header">
+      <!-- Instead of loading an image each time the select changes, use opacity to transition them -->
+      <div class="pservice-image madison" [ngStyle]="location === 'madison' && {'opacity': '1'}"></div>
+      <div class="pservice-image austin" [ngStyle]="location === 'austin' && {'opacity': '1'}"></div>
+      <div class="pservice-image chicago" [ngStyle]="location === 'chicago' && {'opacity': '1'}"></div>
+      <div class="pservice-image seattle" [ngStyle]="location === 'seattle' && {'opacity': '1'}"></div>
+    </div>
+  
+    <div class="pservice-info">
+      <h3 class="ion-padding-top ion-padding-start">{{ service.mainTitle | uppercase }} SERVICE</h3>
+  
+      <p class="ion-padding-start ion-padding-end">
+        {{ service.details }}
+      </p>
+  
+      <h3 class="ion-padding-top ion-padding-start">Details</h3>
+  
+      <ion-list lines="none">
+        <ion-item>
+          <ion-label>
+            Location
+          </ion-label>
+          <ion-select [(ngModel)]="location" [interfaceOptions]="selectOptions">
+            <ion-select-option value="madison">Madison, WI</ion-select-option>
+            <ion-select-option value="austin">Austin, TX</ion-select-option>
+            <ion-select-option value="chicago">Chicago, IL</ion-select-option>
+            <ion-select-option value="seattle">Seattle, WA</ion-select-option>
+          </ion-select>
+        </ion-item>
+        <ion-item button="true" id="open-date-input">
+          <ion-label>
+            Date
+          </ion-label>
+          <ion-text slot="end">{{ conferenceDate | date: 'mediumDate' }}</ion-text>
+          <ion-popover id="date-input-popover" trigger="open-date-input" [showBackdrop]="false" side="top" alignment="end">
+            <ng-template>
+              <ion-datetime max="2056" [(ngModel)]="conferenceDate" presentation="date"></ion-datetime>
+            </ng-template>
+          </ion-popover>
+        </ion-item>
+      </ion-list>
+    </div>
+  </ion-content>
+  

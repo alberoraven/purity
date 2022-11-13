@@ -1,0 +1,16 @@
+
+.card-icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 24px;
+    width: 45px;
+    height: 45px;
+    margin-right: 15px;
+    border-radius: 30px;
+    background-color: #eaecf6;
+    .icon {
+        font-size: 24px;
+        color: var(--ion-color-primary);
+    }
+}
