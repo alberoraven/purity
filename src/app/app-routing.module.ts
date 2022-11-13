@@ -48,7 +48,19 @@ const routes: Routes = [
   {
     path: 'forget-password',
     loadChildren: () => import('./pages/forget/forget.module').then(m => m.ForgetModule),
-  }
+  },
+  {
+    path: 'email-reset',
+    loadChildren: () => import('./pages/email-recovery/email-recovery.module').then(m => m.EmailRecoveryModule),
+  },
+  {
+    path: 'phone-reset',
+    loadChildren: () => import('./pages/phone-recovery/phone-recovery.module').then(m => m.PhoneRecoveryModule),
+  },
+  {
+    path: 'reset-password',
+    loadChildren: () => import('./pages/reset-password/reset-password.module').then(m => m.ResetPasswordModule),
+  },
 ];
 
 @NgModule({

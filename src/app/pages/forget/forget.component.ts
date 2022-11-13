@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 
 @Component({
@@ -9,8 +8,6 @@ import { Router } from '@angular/router';
 })
 
 export class ForgetComponent implements OnInit {
-  forget: any = { oldpassword: '', newpassword: '' };
-  submitted = false;
   
   constructor(
     public router: Router
@@ -21,11 +18,8 @@ export class ForgetComponent implements OnInit {
   }
 
 
-  async onForget(form: NgForm) {
-    this.submitted = true;
-    if (form.valid) {
-        console.log("asd");
-    }
+  onCardReset(url) {
+    this.router.navigateByUrl(`/${url}`);
   }
 }
 

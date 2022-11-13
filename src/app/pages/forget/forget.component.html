@@ -2,70 +2,39 @@
 
     <div class="ion-padding">
       <ion-text>
-        <h2 class="color-dark">Lets you reset password</h2>
-        <p class="color-secondary">Feel free to rest password</p>
+        <h2 class="color-dark">FORGET PASSWORD</h2>
+        <p class="color-secondary">Please select option to send link reset password</p>
       </ion-text>
     </div>
-  
-    <form #loginForm="ngForm" novalidate>
-      <ion-list class="ion-padding-bottom">
-        <ion-item lines="none">
-          <ion-label position="stacked" class="color-dark">Old Password</ion-label>
-          <ion-input
-            [(ngModel)]="forget.oldpassword"
-            class="purity-text-input"
-            name="username"
-            type="text"
-            #username="ngModel"
-            spellcheck="false"
-            autocapitalize="off"
-            required
-          >
-          </ion-input>
-        </ion-item>
-  
-        <ion-text color="danger">
-          <p
-            [hidden]="username.valid || submitted === false"
-            class="ion-padding-start"
-          >
-            Username is required
-          </p>
-        </ion-text>
-  
-        <ion-item lines="none">
-          <ion-label position="stacked" class="color-dark">New Password</ion-label>
-          <ion-input
-            [(ngModel)]="forget.newpassword"
-            class="purity-text-input"
-            name="password"
-            type="password"
-            #password="ngModel"
-            required
-          >
-          </ion-input>
-        </ion-item>
-  
-        <ion-text color="danger">
-          <p
-            [hidden]="password.valid || submitted === false"
-            class="ion-padding-start"
-          >
-            Password is required
-          </p>
-        </ion-text>
-      </ion-list>
-  
-      <ion-buttons slot="primary">
-        <ion-grid>
-          <ion-row>
-            <ion-col class="ion-padding-bottom" size="12">
-              <ion-button class="purity-button-primary" (click)="onForget(loginForm)" type="submit" expand="block">Save password</ion-button>
-            </ion-col>
-          </ion-row>
-        </ion-grid>
-      </ion-buttons>
-    </form>
+    
+    <ion-card (click)="onCardReset('email-reset')">
+      <ion-card-header>
+        <ion-row>
+          <div class="card-icon">
+            <ion-icon class="icon" name="mail-open-sharp"></ion-icon>
+          </div>
+          <div>
+            <ion-card-subtitle>Reset via email</ion-card-subtitle>
+            <ion-card-title>If you have email linked to account</ion-card-title>
+          </div>
+        </ion-row>
+      </ion-card-header>
+    </ion-card>
+
+    <ion-card (click)="onCardReset('phone-reset')">
+      <ion-card-header>
+        <ion-row>
+          <div class="card-icon">
+            <ion-icon class="icon" name="recording-sharp"></ion-icon>
+          </div>
+          <div>
+            <ion-card-subtitle>Reset via SMS</ion-card-subtitle>
+            <ion-card-title>If you have number linked to account</ion-card-title>
+          </div>
+        </ion-row>
+      </ion-card-header>
+    </ion-card>
+    
   
     <app-wave-animation></app-wave-animation>
   </ion-content>
