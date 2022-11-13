@@ -1,67 +1,61 @@
-<!-- <ion-header>
+<ion-header>
     <ion-toolbar>
       <ion-buttons slot="start">
         <ion-menu-button></ion-menu-button>
       </ion-buttons>
       <ion-title>My Profile</ion-title>
     </ion-toolbar>
-</ion-header> -->
+</ion-header>
   
 <ion-content>
     <ion-grid>
-        <legend class="ion-padding"><h2>PROFILE DETAILS</h2></legend>
+        <legend class="ion-padding">PROFILE DETAILS</legend>
         <ion-row>
             <ion-col size="12">
                 <form [formGroup]="profileForm" (ngSubmit)="onProfileSubmit()">
-                    <ion-item lines="none">
-                        <ion-label position="stacked" class="color-dark">Username</ion-label>
-                        <ion-input class="purity-text-input" formControlName="userName" id="userName" name="userName" type="text">
+                    <ion-item>
+                        <ion-label position="stacked" color="primary">Username</ion-label>
+                        <ion-input formControlName="userName" id="userName" name="userName" type="text">
                         </ion-input>
                     </ion-item>
-                    <ion-item lines="none">
-                        <ion-label position="stacked" class="color-dark">Firstname</ion-label>
-                        <ion-input class="purity-text-input" formControlName="firstName" id="firstName" name="firstName" type="text">
+                    <ion-item>
+                        <ion-label position="stacked" color="primary">Firstname</ion-label>
+                        <ion-input formControlName="firstName" id="firstName" name="firstName" type="text">
                         </ion-input>
                     </ion-item>
-                    <ion-item lines="none">
-                        <ion-label position="stacked" class="color-dark">Lastname</ion-label>
-                        <ion-input class="purity-text-input" formControlName="lastName" id="lastName" name="lastName" type="text">
+                    <ion-item>
+                        <ion-label position="stacked" color="primary">Lastname</ion-label>
+                        <ion-input formControlName="lastName" id="lastName" name="lastName" type="text">
                         </ion-input>
                     </ion-item>
-                    <ion-item lines="none">
-                        <ion-label position="stacked" class="color-dark">Email</ion-label>
-                        <ion-input class="purity-text-input" formControlName="email" id="email" name="email" type="email">
+                    <ion-item>
+                        <ion-label position="stacked" color="primary">Email</ion-label>
+                        <ion-input formControlName="email" id="email" name="email" type="email">
                         </ion-input>
                     </ion-item>
-                    <ion-item lines="none">
-                        <ion-label position="stacked" class="color-dark">Phone Number</ion-label>
-                        <ion-input class="purity-text-input" formControlName="phone" id="phone" name="phone" type="text">
+                    <ion-item>
+                        <ion-label position="stacked" color="primary">Phone Number</ion-label>
+                        <ion-input formControlName="phone" id="phone" name="phone" type="text">
                         </ion-input>
                     </ion-item>
-                    <ion-item lines="none">
-                        <ion-label position="stacked" class="color-dark">Address</ion-label>
-                        <ion-input class="purity-text-input" formControlName="address" id="address" name="address" type="text">
+                    <ion-item>
+                        <ion-label position="stacked" color="primary">Address</ion-label>
+                        <ion-input formControlName="address" id="address" name="address" type="text">
                         </ion-input>
                     </ion-item>
-                    <ion-item lines="none">
-                        <ion-label position="stacked" class="color-dark">City</ion-label>
-                        <ion-input class="purity-text-input" formControlName="city" id="city" name="city" type="text">
+                    <ion-item>
+                        <ion-label position="stacked" color="primary">City</ion-label>
+                        <ion-input formControlName="city" id="city" name="city" type="text">
                         </ion-input>
                     </ion-item>
-                    <ion-item lines="none">
-                        <ion-label position="stacked" class="color-dark">State</ion-label>
-                        <ion-input class="purity-text-input" formControlName="state" id="state" name="state" type="text">
+                    <ion-item>
+                        <ion-label position="stacked" color="primary">State</ion-label>
+                        <ion-input formControlName="state" id="state" name="state" type="text">
                         </ion-input>
                     </ion-item>
-                    <ion-buttons slot="primary">
-                        <ion-grid>
-                          <ion-row>
-                            <ion-col class="ion-padding-top ion-padding-bottom" size="12">
-                              <ion-button class="purity-button-primary" (click)="onProfileSubmit()" type="submit" expand="block" [disabled]="!profileForm.valid">Update Profile</ion-button>
-                            </ion-col>
-                          </ion-row>
-                        </ion-grid>
-                    </ion-buttons>
+                    <div class="ion-padding">
+                        <ion-button (click)="onProfileSubmit()" type="submit" expand="block" [disabled]="!profileForm.valid">Update Profile</ion-button>
+                    </div>
                 </form>
             </ion-col>
         </ion-row>
