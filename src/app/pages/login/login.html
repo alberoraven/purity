@@ -1,14 +1,21 @@
 <ion-content>
-  <div class="login-logo">
+  <!-- <div class="login-logo">
     <img src="assets/img/undraw_secure_login_pdn4.svg" alt="Ionic logo" />
+  </div> -->
+  <div class="ion-padding">
+    <ion-text>
+      <h2 class="color-dark">Lets you sign in</h2>
+      <p class="color-secondary">Welcome back you have been missed</p>
+    </ion-text>
   </div>
 
   <form #loginForm="ngForm" novalidate>
-    <ion-list>
-      <ion-item>
-        <ion-label position="stacked" color="primary">Username</ion-label>
+    <ion-list class="ion-padding-bottom">
+      <ion-item lines="none">
+        <ion-label position="stacked" class="color-dark">Username</ion-label>
         <ion-input
           [(ngModel)]="login.username"
+          class="purity-text-input"
           name="username"
           type="text"
           #username="ngModel"
@@ -28,10 +35,11 @@
         </p>
       </ion-text>
 
-      <ion-item>
-        <ion-label position="stacked" color="primary">Password</ion-label>
+      <ion-item lines="none">
+        <ion-label position="stacked" class="color-dark">Password</ion-label>
         <ion-input
           [(ngModel)]="login.password"
+          class="purity-text-input"
           name="password"
           type="password"
           #password="ngModel"
@@ -50,25 +58,32 @@
       </ion-text>
     </ion-list>
 
-    <ion-row>
-      <ion-col>
-        <ion-button (click)="onLogin(loginForm)" type="submit" expand="block"
-          >Login</ion-button
-        >
-      </ion-col>
-      <ion-col>
-        <ion-button (click)="onSignup()" color="light" expand="block"
-          >Signup</ion-button
-        >
-      </ion-col>
-    </ion-row>
-    <ion-row>
-      <ion-col>
-        <ion-button (click)="oAuthLogin()" type="submit" expand="block"
-          >Login with Google</ion-button
-        >
-      </ion-col>
-    </ion-row>
+    <ion-buttons slot="primary">
+      <ion-grid>
+        <ion-row>
+          <ion-col class="ion-padding-bottom" size="12">
+            <ion-button class="purity-button-primary" (click)="onLogin(loginForm)" type="submit" expand="block">Login</ion-button>
+          </ion-col>
+          <ion-col class="ion-padding-bottom" size="12">
+            <ion-button class="purity-button-secondary" (click)="oAuthLogin()" type="submit" expand="block">
+              <ion-icon class="ion-padding-end" name="logo-google"></ion-icon>Login with Google
+            </ion-button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-buttons>
+    <ion-grid class="ion-padding">
+      <ion-row class="sign-up-content">
+          <ion-text class="color-secondary">
+            <p>Don't have account?</p>
+          </ion-text>
+          <ion-item lines="none" (click)="onSignup()">
+            <ion-text class="color-primary">
+              Create one
+            </ion-text>
+          </ion-item>
+      </ion-row>
+    </ion-grid>
   </form>
 
   <!--Hey! This is the original version
