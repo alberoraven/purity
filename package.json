@@ -25,6 +25,7 @@
     "@angular/platform-browser-dynamic": "^13.3.0",
     "@angular/router": "^13.3.0",
     "@angular/service-worker": "^13.3.0",
+    "@apollo/client": "^3.0.0",
     "@capacitor/android": "3.4.3",
     "@capacitor/app": "1.1.1",
     "@capacitor/core": "3.4.3",
@@ -45,11 +46,10 @@
     "graphql": "^16.6.0",
     "rxjs": "^6.5.4",
     "sw-toolbox": "3.6.0",
-    "swiper": "8.0.7",
+    "swiper": "^8.0.7",
     "tslib": "^2.0.0",
     "webdriver-manager": "^12.1.8",
-    "zone.js": "~0.11.4",
-    "@apollo/client": "^3.0.0"
+    "zone.js": "~0.11.4"
   },
   "devDependencies": {
     "@angular-devkit/architect": "^0.1303.0",

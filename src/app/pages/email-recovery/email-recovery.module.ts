@@ -3,20 +3,18 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 
-import { SignupPage } from './signup';
-import { SignupPageRoutingModule } from './signup-routing.module';
+import { EmailRecoveryComponent } from "./email-recovery.component";
+import { EmailRecoveryRoutingModule } from './email-recovery-routing.module';
 import { AnimationModule } from "../../animation/animation.module";
 
 @NgModule({
+  declarations: [EmailRecoveryComponent],
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    SignupPageRoutingModule,
+    EmailRecoveryRoutingModule,
     AnimationModule
-  ],
-  declarations: [
-    SignupPage,
   ]
 })
-export class SignUpModule { }
+export class EmailRecoveryModule { }

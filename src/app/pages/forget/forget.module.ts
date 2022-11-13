@@ -3,20 +3,19 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 
-import { SignupPage } from './signup';
-import { SignupPageRoutingModule } from './signup-routing.module';
+import { ForgetComponent } from './forget.component';
+import { ForgetRoutingModule } from './forget-routing.module';
 import { AnimationModule } from "../../animation/animation.module";
 
+
 @NgModule({
+  declarations: [ForgetComponent],
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    SignupPageRoutingModule,
+    ForgetRoutingModule,
     AnimationModule
-  ],
-  declarations: [
-    SignupPage,
   ]
 })
-export class SignUpModule { }
+export class ForgetModule { }
