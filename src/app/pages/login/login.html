@@ -46,6 +46,16 @@
         </ion-input>
       </ion-item>
 
+      <ion-grid class="ion-padding-top ion-padding-end">
+        <ion-row class="forget-content">
+            <ion-item lines="none" (click)="onForget()">
+              <ion-text class="color-primary">
+                Forget Password
+              </ion-text>
+            </ion-item>
+        </ion-row>
+      </ion-grid>
+
       <ion-text color="danger">
         <p
           [hidden]="password.valid || submitted === false"

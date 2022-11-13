@@ -57,4 +57,8 @@ export class LoginPage implements OnInit {
   onSignup() {
     this.router.navigateByUrl('/signup');
   }
+
+  onForget() {
+    this.router.navigateByUrl('/forget-password');
+  }
 }
