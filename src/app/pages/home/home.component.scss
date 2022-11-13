@@ -1,7 +1,7 @@
 @import "~swiper/css";
 @import "~swiper/css/pagination";
 @import "~swiper/css/navigation";
-
+@import "../../../global.scss";
 
 .swiper {
     width: 100%;
@@ -14,7 +14,7 @@
     .swiper-slide {
         text-align: center;
         font-size: 18px;
-        background: #fff;
+        background: $color-white;
       
         /* Center slide text vertically */
         display: -webkit-box;
@@ -47,12 +47,15 @@
 .service {
     &-card {
         cursor: pointer;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
     }
     &-title {
-        color: #fff;
+        color: $color-white;
     }
     &-subtitle {
-        color: #fff;
+        color: $color-white;
     }
     &-img {
         position: absolute;
@@ -69,7 +72,7 @@
         }
     }
     &-details {
-        color: #fff;
+        color: $color-white;
         padding-bottom: 30px;
     }
 }

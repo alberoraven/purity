@@ -57,7 +57,7 @@ export class HomeComponent implements OnInit {
     pagination: { clickable: true },
     scrollbar: { draggable: true },
     autoplay: {
-      delay: 300,
+      delay: 3000,
       disableOnInteraction: false
     }
   };
