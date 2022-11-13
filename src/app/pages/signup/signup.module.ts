@@ -5,13 +5,15 @@ import { IonicModule } from '@ionic/angular';
 
 import { SignupPage } from './signup';
 import { SignupPageRoutingModule } from './signup-routing.module';
+import { AnimationModule } from "../../animation/animation.module";
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    SignupPageRoutingModule
+    SignupPageRoutingModule,
+    AnimationModule
   ],
   declarations: [
     SignupPage,

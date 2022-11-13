@@ -5,6 +5,7 @@ import { IonicModule } from '@ionic/angular';
 
 import { ForgetComponent } from './forget.component';
 import { ForgetRoutingModule } from './forget-routing.module';
+import { AnimationModule } from "../../animation/animation.module";
 
 
 @NgModule({
@@ -13,7 +14,8 @@ import { ForgetRoutingModule } from './forget-routing.module';
     CommonModule,
     FormsModule,
     IonicModule,
-    ForgetRoutingModule
+    ForgetRoutingModule,
+    AnimationModule
   ]
 })
 export class ForgetModule { }
