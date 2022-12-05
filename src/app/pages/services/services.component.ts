@@ -4,6 +4,8 @@ import { Iservice } from '../../providers/interface';
 
 import { PopoverController } from '@ionic/angular';
 import { PopoverPage } from '../about-popover/about-popover';
+import { FormBuilder, Validators, FormGroup } from '@angular/forms';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-services',
@@ -14,16 +16,44 @@ export class ServicesComponent implements OnInit {
 
   service: Iservice;
 
-  location = 'madison';
-  conferenceDate = '2047-05-17';
+  conferenceDate = new Date();
+  locationList = [
+    {
+      name: 'Alwarpet',
+      code: 'Alwarpet',
+    },
+    {
+      name: 'Ambattur',
+      code: 'Ambattur',
+    },
+    {
+      name: 'Alathur',
+      code: 'Alathur'
+    }
+  ]
 
   selectOptions = {
     header: 'Select a Location'
   };
 
-  constructor(private router: Router, public popoverCtrl: PopoverController) { 
+  public bookingForm : FormGroup;
+
+  constructor(
+    private bookingFormBuilder: FormBuilder,
+    private router: Router, 
+    public popoverCtrl: PopoverController
+    ) {
+
     const data = this.router?.getCurrentNavigation()?.extras?.state;
-    if (data) this.service = data; else this.router.navigate(['home'])
+    if (data) this.service = data; else this.router.navigate(['home']);
+
+    this.bookingForm = this.bookingFormBuilder.group({
+      locality: ['', [Validators.required]],
+      slotdate: ['', [Validators.required,]]
+    });
+
+    this.bookingForm.controls['locality'].setValue('Alathur');
+    this.bookingForm.controls['slotdate'].setValue(moment(new Date()).format('YYYY-MM-DD'));
   }
 
   async presentPopover(event: Event) {
@@ -34,8 +64,13 @@ export class ServicesComponent implements OnInit {
     await popover.present();
   }
 
-  ngOnInit(): void {
-    
+  ngOnInit(): void { }
+
+  onbookingFormSubmit() {
+    if (!this.bookingForm.invalid) {
+      let formValue = JSON.stringify(this.bookingForm.value);
+      console.log(formValue);
+    }
   }
 
 }
