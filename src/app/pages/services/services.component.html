@@ -28,17 +28,14 @@
       </p>
   
       <h3 class="ion-padding-top ion-padding-start">Details</h3>
-  
+      <form [formGroup]="bookingForm" (ngSubmit)="onbookingFormSubmit()">
       <ion-list lines="none">
         <ion-item>
           <ion-label>
             Location
           </ion-label>
-          <ion-select [(ngModel)]="location" [interfaceOptions]="selectOptions">
-            <ion-select-option value="madison">Madison, WI</ion-select-option>
-            <ion-select-option value="austin">Austin, TX</ion-select-option>
-            <ion-select-option value="chicago">Chicago, IL</ion-select-option>
-            <ion-select-option value="seattle">Seattle, WA</ion-select-option>
+          <ion-select formControlName="locality" [interfaceOptions]="selectOptions" [value]="location" #location >
+            <ion-select-option *ngFor="let location of locationList" [value]="location.code"> {{ location.name }} </ion-select-option>
           </ion-select>
         </ion-item>
         <ion-item button="true" id="open-date-input">
@@ -48,11 +45,17 @@
           <ion-text slot="end">{{ conferenceDate | date: 'mediumDate' }}</ion-text>
           <ion-popover id="date-input-popover" trigger="open-date-input" [showBackdrop]="false" side="top" alignment="end">
             <ng-template>
-              <ion-datetime max="2056" [(ngModel)]="conferenceDate" presentation="date"></ion-datetime>
+              <ion-datetime formControlName="slotdate" max="2056" presentation="date"></ion-datetime>
             </ng-template>
           </ion-popover>
         </ion-item>
+
+        <ion-item class="ion-padding-top">
+          <ion-button class="purity-button-primary" type="submit" expand="block">BOOK NOW</ion-button>
+        </ion-item>
+
       </ion-list>
+      </form>
     </div>
   </ion-content>
   
