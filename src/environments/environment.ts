@@ -4,8 +4,8 @@
 // The list of which env maps to which file can be found in `.angular-cli.json`.
 export const environment = {
   production: false,
-  backendUrl: 'https://kehjgojtsrxirpgewzwz.nhost.run',
-  subdomain: 'kehjgojtsrxirpgewzwz',
+  backendUrl: 'https://vmwbedddybyoxikbfriq.nhost.run',
+  subdomain: 'vmwbedddybyoxikbfriq',
   region: 'ap-south-1'
 };
 
