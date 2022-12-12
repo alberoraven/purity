@@ -6,6 +6,7 @@ import { ScheduleFilterPage } from '../schedule-filter/schedule-filter';
 import { ConferenceData } from '../../providers/conference-data';
 import { UserData } from '../../providers/user-data';
 import { nhost } from '../../providers/global';
+import { GetVendorsList, GetVendorProfiles, GetActiveBookings } from '../../@shared/queries';
 
 @Component({
   selector: 'page-schedule',
@@ -45,6 +46,46 @@ export class SchedulePage implements OnInit {
 
     setTimeout(() => {
       this.user.login(nhost.auth.getUser());
+    });
+
+    this.checkUsers();
+  }
+
+  async checkUsers(){
+    let userDetails = await nhost.auth.getUser();
+    if(userDetails != null)
+    console.log(userDetails)
+    {
+      await this.sharedService.executeQuery(GetVendorsList(userDetails.email)).then((res : any) => {
+        console.log("GetVendorsList :", res);
+        if(res.vendors_list.length > 0){
+          this.vendorProfileCheck(userDetails);
+        }else{
+          // navigate to user screen
+        }
+      });
+    }
+  }
+
+  async vendorProfileCheck(userDetails : any){
+    await this.sharedService.executeQuery(GetVendorProfiles(userDetails.id)).then((res : any) => {
+      console.log("GetVendorProfiles :", res);
+      if(res.vendor_profiles.length > 0){
+        this.checkActiveBooking(userDetails)
+      }else{
+        // navigate to profile screen
+      }
+    });
+  }
+
+  async checkActiveBooking(userDetails : any){
+    await this.sharedService.executeQuery(GetActiveBookings(userDetails.id)).then((res : any) => {
+      console.log("GetActiveBookings :", res);
+      if(res.active_bookings.length > 0){
+        // navigate to home screen and display active bookings
+      }else{
+        // alert no bookings available
+      }
     });
   }
 
