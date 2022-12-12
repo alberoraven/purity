@@ -1,20 +1,23 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { IonicModule } from '@ionic/angular';
-import { HomeRoutingModule } from './home-routing.module';
-import { HomeComponent } from './home.component';
-import { SwiperModule } from 'swiper/angular';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ServicesRoutingModule } from './services-routing.module';
+import { ServicesComponent } from './services.component';
 import { SevicesProvider } from '../../providers/service-data/service.data';
+
+
 @NgModule({
   declarations: [
-    HomeComponent
+    ServicesComponent
   ],
   imports: [
     CommonModule,
-    HomeRoutingModule,
     IonicModule,
-    SwiperModule
+    FormsModule,
+    ServicesRoutingModule,
+    ReactiveFormsModule
   ],
   providers: [SevicesProvider]
 })
-export class HomeModule { }
+export class ServicesModule { }

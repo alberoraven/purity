@@ -2,7 +2,9 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { Router } from '@angular/router'; 
 // import Swiper core and required modules
 import SwiperCore, { Autoplay, Pagination, Navigation, SwiperOptions } from "swiper";
-import { Iservice } from '../../providers/interface';
+import { IService } from '../../providers/service-data/service.modal';
+import { SevicesProvider } from '../../providers/service-data/service.data';
+
 
 // install Swiper modules
 SwiperCore.use([Autoplay, Pagination, Navigation]);
@@ -14,41 +16,7 @@ SwiperCore.use([Autoplay, Pagination, Navigation]);
   encapsulation: ViewEncapsulation.None,
 })
 export class HomeComponent implements OnInit {
-
-  sevices: Iservice[] = [
-    {
-      image: "seattle",
-      mainTitle: "Dishes Cleaning",
-      rating: 3,
-      price: "$125",
-      duration: "30min",
-      details: "Farhan Rio Agent Manager Dishes Cleaning Car Cleaning Outdoor Cleaning Furniture Cleaning Kitchen Cleaning Clean Water Pipe Door Cleaning Dishes Cleaning for Rob As a app web crawler expert."
-    },
-    {
-      image: "chicago",
-      mainTitle: "Door Cleaning",
-      rating: 3,
-      price: "$125",
-      duration: "30min",
-      details: "Farhan Rio Agent Manager Dishes Cleaning Car Cleaning Outdoor Cleaning Furniture Cleaning Kitchen Cleaning Clean Water Pipe Door Cleaning Dishes Cleaning for Rob As a app web crawler expert."
-    },
-    {
-      image: "madison",
-      mainTitle: "Furniture Cleaning",
-      rating: 3,
-      price: "$125",
-      duration: "30min",
-      details: "Farhan Rio Agent Manager Dishes Cleaning Car Cleaning Outdoor Cleaning Furniture Cleaning Kitchen Cleaning Clean Water Pipe Door Cleaning Dishes Cleaning for Rob As a app web crawler expert."
-    },
-    {
-      image: "austin",
-      mainTitle: "Apartment Cleaning",
-      rating: 3,
-      price: "$125",
-      duration: "30min",
-      details: "Farhan Rio Agent Manager Dishes Cleaning Car Cleaning Outdoor Cleaning Furniture Cleaning Kitchen Cleaning Clean Water Pipe Door Cleaning Dishes Cleaning for Rob As a app web crawler expert."
-    }
-  ]
+  sevicesList: IService[];
 
   config: SwiperOptions = {
     slidesPerView: 1,
@@ -62,13 +30,21 @@ export class HomeComponent implements OnInit {
     }
   };
 
-  constructor(private router: Router) { }
+  constructor(
+    private router: Router,
+    private _sevicesProvider: SevicesProvider,
+  ) { }
 
-  ngOnInit(): void {
+  async ngOnInit() {
+    await this._sevicesProvider.serviceListGraphql().then(res => {
+      this.sevicesList = res;
+    });
   }
 
   onSlideChange() {
-    console.log('slide change');
+    // this._sevicesProvider.getserviceList().subscribe(res => {
+    //   console.log(res);
+    // })
   }
 
   onClickService(event) {

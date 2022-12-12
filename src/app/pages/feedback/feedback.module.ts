@@ -1,21 +1,22 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+
+import { FeedbackRoutingModule } from './feedback-routing.module';
+import { FeedbackComponent } from './feedback.component';
+
 import { IonicModule } from '@ionic/angular';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { ServicesRoutingModule } from './services-routing.module';
-import { ServicesComponent } from './services.component';
-
 
 @NgModule({
   declarations: [
-    ServicesComponent
+    FeedbackComponent
   ],
   imports: [
     CommonModule,
     IonicModule,
     FormsModule,
-    ServicesRoutingModule,
+    FeedbackRoutingModule,
     ReactiveFormsModule
   ]
 })
-export class ServicesModule { }
+export class FeedbackModule { }

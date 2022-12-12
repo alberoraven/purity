@@ -21,10 +21,15 @@
     </div>
   
     <div class="pservice-info">
-      <h3 class="ion-padding-top ion-padding-start">{{ service.mainTitle | uppercase }} SERVICE</h3>
-  
+      <h3 class="ion-padding-top ion-padding-start">{{ service.name | uppercase }} SERVICE</h3>
+      <h5 class="ion-padding-start ion-padding-end">
+        Price: {{service.price}} <br> 
+        Rating: {{service.ratings}} <br>
+        Duration: {{service.duration}} <br>
+        Duration: {{service.reviews_count}}
+      </h5>
       <p class="ion-padding-start ion-padding-end">
-        {{ service.details }}
+        {{ service.description }}
       </p>
   
       <h3 class="ion-padding-top ion-padding-start">Details</h3>
