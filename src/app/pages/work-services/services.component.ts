@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Iservice } from '../../providers/interface';
+import { IService } from '../../providers/service-data/service.modal';
 
 import { PopoverController } from '@ionic/angular';
 import { PopoverPage } from '../about-popover/about-popover';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import * as moment from 'moment';
+import { SevicesProvider } from '../../providers/service-data/service.data';
 
 @Component({
   selector: 'app-services',
@@ -14,7 +15,7 @@ import * as moment from 'moment';
 })
 export class ServicesComponent implements OnInit {
 
-  service: Iservice;
+  service: any;
 
   conferenceDate = new Date();
   locationList = [
@@ -41,7 +42,8 @@ export class ServicesComponent implements OnInit {
   constructor(
     private bookingFormBuilder: FormBuilder,
     private router: Router, 
-    public popoverCtrl: PopoverController
+    public popoverCtrl: PopoverController,
+    private _sevicesProvider: SevicesProvider,
     ) {
 
     const data = this.router?.getCurrentNavigation()?.extras?.state;
@@ -64,7 +66,13 @@ export class ServicesComponent implements OnInit {
     await popover.present();
   }
 
-  ngOnInit(): void { }
+  ngOnInit(): void { 
+    // this.service = this._sevicesProvider.getserviceList();
+    this._sevicesProvider.getserviceList().subscribe(res => {
+      console.log(res);
+    })
+    
+  }
 
   onbookingFormSubmit() {
     if (!this.bookingForm.invalid) {

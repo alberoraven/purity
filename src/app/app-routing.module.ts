@@ -43,7 +43,7 @@ const routes: Routes = [
   },
   {
     path: 'service',
-    loadChildren: () => import('./pages/services/services.module').then(m => m.ServicesModule),
+    loadChildren: () => import('./pages/work-services/services.module').then(m => m.ServicesModule),
   },
   {
     path: 'forget-password',
@@ -61,6 +61,10 @@ const routes: Routes = [
     path: 'reset-password',
     loadChildren: () => import('./pages/reset-password/reset-password.module').then(m => m.ResetPasswordModule),
   },
+  {
+    path: 'feedback',
+    loadChildren: () => import('./pages/feedback/feedback.module').then(m => m.FeedbackModule),
+  }
 ];
 
 @NgModule({
