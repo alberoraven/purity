@@ -6,6 +6,7 @@ import { IonicModule } from '@ionic/angular';
 import { SchedulePage } from './schedule';
 import { ScheduleFilterPage } from '../schedule-filter/schedule-filter';
 import { SchedulePageRoutingModule } from './schedule-routing.module';
+import { ScheduleProvider } from '../../providers/schedule-data/schedule.data';
 
 @NgModule({
   imports: [
@@ -20,6 +21,7 @@ import { SchedulePageRoutingModule } from './schedule-routing.module';
   ],
   entryComponents: [
     ScheduleFilterPage
-  ]
+  ],
+  providers: [ScheduleProvider]
 })
 export class ScheduleModule { }

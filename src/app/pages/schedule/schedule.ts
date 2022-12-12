@@ -7,7 +7,7 @@ import { ConferenceData } from '../../providers/conference-data';
 import { UserData } from '../../providers/user-data';
 import { nhost } from '../../providers/global';
 import { GetVendorsList, GetVendorProfiles, GetActiveBookings } from '../../@shared/queries';
-
+import { ScheduleProvider } from '../../providers/schedule-data/schedule.data';
 @Component({
   selector: 'page-schedule',
   templateUrl: 'schedule.html',
@@ -28,6 +28,7 @@ export class SchedulePage implements OnInit {
   showSearchbar: boolean;
 
   constructor(
+    public _scheduleProvider : ScheduleProvider,
     public alertCtrl: AlertController,
     public confData: ConferenceData,
     public loadingCtrl: LoadingController,
@@ -56,8 +57,11 @@ export class SchedulePage implements OnInit {
     if(userDetails != null)
     console.log(userDetails)
     {
-      await this.sharedService.executeQuery(GetVendorsList(userDetails.email)).then((res : any) => {
-        console.log("GetVendorsList :", res);
+      await this._scheduleProvider.executeQuery(GetVendorsList(userDetails.email) , 'role').then((res : any) => {
+        // console.log("GetVendorsList :", res);
+        this._scheduleProvider.getSchedule('role').subscribe((res : any) => {
+          console.log("role : ", res)
+        });
         if(res.vendors_list.length > 0){
           this.vendorProfileCheck(userDetails);
         }else{
@@ -68,8 +72,11 @@ export class SchedulePage implements OnInit {
   }
 
   async vendorProfileCheck(userDetails : any){
-    await this.sharedService.executeQuery(GetVendorProfiles(userDetails.id)).then((res : any) => {
-      console.log("GetVendorProfiles :", res);
+    await this._scheduleProvider.executeQuery(GetVendorProfiles(userDetails.id) ,  'profile').then((res : any) => {
+      // console.log("GetVendorProfiles :", res);
+      this._scheduleProvider.getSchedule('profile').subscribe((res : any) => {
+        console.log("profile : ", res)
+      });
       if(res.vendor_profiles.length > 0){
         this.checkActiveBooking(userDetails)
       }else{
@@ -79,11 +86,15 @@ export class SchedulePage implements OnInit {
   }
 
   async checkActiveBooking(userDetails : any){
-    await this.sharedService.executeQuery(GetActiveBookings(userDetails.id)).then((res : any) => {
-      console.log("GetActiveBookings :", res);
+    await this._scheduleProvider.executeQuery(GetActiveBookings(userDetails.id),  'bookings').then((res : any) => {
+      // console.log("GetActiveBookings :", res);
+      this._scheduleProvider.getSchedule('bookings').subscribe((res : any) => {
+        console.log("active bookings : ", res)
+      });
       if(res.active_bookings.length > 0){
         // navigate to home screen and display active bookings
       }else{
+
         // alert no bookings available
       }
     });
