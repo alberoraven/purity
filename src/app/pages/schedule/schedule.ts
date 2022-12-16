@@ -54,49 +54,47 @@ export class SchedulePage implements OnInit {
 
   async checkUsers(){
     let userDetails = await nhost.auth.getUser();
-    if(userDetails != null)
-    console.log(userDetails)
+    if(userDetails)
     {
-      await this._scheduleProvider.executeQuery(GetVendorsList(userDetails.email) , 'role').then((res : any) => {
+      await this._scheduleProvider.scheduleGraphql(GetVendorsList(userDetails?.email) , 'role').then((res : any) => {
         // console.log("GetVendorsList :", res);
         this._scheduleProvider.getSchedule('role').subscribe((res : any) => {
-          console.log("role : ", res)
+          console.log("role : ", res);
+          if(res.vendors_list.length){
+            this.vendorProfileCheck(userDetails);
+          }else{
+            // navigate to user screen
+          }
         });
-        if(res.vendors_list.length > 0){
-          this.vendorProfileCheck(userDetails);
-        }else{
-          // navigate to user screen
-        }
       });
     }
   }
 
   async vendorProfileCheck(userDetails : any){
-    await this._scheduleProvider.executeQuery(GetVendorProfiles(userDetails.id) ,  'profile').then((res : any) => {
+    await this._scheduleProvider.scheduleGraphql(GetVendorProfiles(userDetails.id) ,  'profile').then((res : any) => {
       // console.log("GetVendorProfiles :", res);
       this._scheduleProvider.getSchedule('profile').subscribe((res : any) => {
-        console.log("profile : ", res)
+        console.log("profile : ", res);
+        if(res.vendor_profiles.length > 0){
+          this.checkActiveBooking(userDetails)
+        }else{
+          // navigate to profile screen
+        }
       });
-      if(res.vendor_profiles.length > 0){
-        this.checkActiveBooking(userDetails)
-      }else{
-        // navigate to profile screen
-      }
     });
   }
 
   async checkActiveBooking(userDetails : any){
-    await this._scheduleProvider.executeQuery(GetActiveBookings(userDetails.id),  'bookings').then((res : any) => {
+    await this._scheduleProvider.scheduleGraphql(GetActiveBookings(userDetails.id),  'bookings').then((res : any) => {
       // console.log("GetActiveBookings :", res);
       this._scheduleProvider.getSchedule('bookings').subscribe((res : any) => {
-        console.log("active bookings : ", res)
+        console.log("active bookings : ", res);
+        if(res.active_bookings.length > 0){
+          // navigate to home screen and display active bookings
+        }else{
+          // alert no bookings available
+        }
       });
-      if(res.active_bookings.length > 0){
-        // navigate to home screen and display active bookings
-      }else{
-
-        // alert no bookings available
-      }
     });
   }
 

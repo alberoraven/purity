@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import SwiperCore, { Autoplay, Pagination, Navigation, SwiperOptions } from "swiper";
 import { IService } from '../../providers/service-data/service.modal';
 import { SevicesProvider } from '../../providers/service-data/service.data';
+import { GetServiceList } from "../../@shared/queries";
 
 
 // install Swiper modules
@@ -36,7 +37,7 @@ export class HomeComponent implements OnInit {
   ) { }
 
   async ngOnInit() {
-    await this._sevicesProvider.serviceListGraphql().then(res => {
+    await this._sevicesProvider.serviceListGraphql(GetServiceList()).then(res => {
       this.sevicesList = res;
     });
   }

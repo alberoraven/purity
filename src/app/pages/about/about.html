@@ -31,7 +31,7 @@
 
     <ion-list lines="none">
       <ion-item>
-        <ion-label>
+        <ion-label class="purity-text-label">
           Location
         </ion-label>
         <ion-select [(ngModel)]="location" [interfaceOptions]="selectOptions">
@@ -42,7 +42,7 @@
         </ion-select>
       </ion-item>
       <ion-item button="true" id="open-date-input">
-        <ion-label>
+        <ion-label class="purity-text-label">
           Date
         </ion-label>
         <ion-text slot="end">{{ conferenceDate | date: 'mediumDate' }}</ion-text>
@@ -58,18 +58,18 @@
 
     <ion-list lines="none">
       <ion-item>
-        <ion-label>
+        <ion-label class="purity-text-label">
           Wifi network
         </ion-label>
-        <ion-label class="ion-text-end">
+        <ion-label class="purity-text-label" class="ion-text-end">
           ica{{conferenceDate | date: 'y'}}
         </ion-label>
       </ion-item>
       <ion-item>
-        <ion-label>
+        <ion-label class="purity-text-label">
           Password
         </ion-label>
-        <ion-label class="ion-text-end">
+        <ion-label class="purity-text-label" class="ion-text-end">
           makegoodthings
         </ion-label>
       </ion-item>

@@ -35,7 +35,7 @@
     <div class="service" *ngIf="sevicesList">
         <legend class="ion-padding-start"><h2>Services</h2></legend>
         <ion-row>
-            <ion-col *ngFor="let service of sevicesList" size="12">
+            <ion-col *ngFor="let service of sevicesList" size="12" size-md="6">
                 <!-- [ngStyle]="{'background-image': 'url(../../../assets/img/about/'+ service.image +'.jpg)'}" -->
                 <ion-card class="service-card" (click)="onClickService(service)" 
                 >

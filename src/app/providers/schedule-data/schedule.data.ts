@@ -33,17 +33,10 @@ export class ScheduleProvider {
     return of<any>(data);
   }
 
-  async executeQuery(query: any, params?: any) {
+  async scheduleGraphql(query: any, params: string) {
     try {
-      const requestQuery = gql`${query}`;
-      const { data, error } = await nhost.graphql.request(requestQuery);
-      if (data) {
-        this._setCacheSchedule(params , { ...data })
-        return data
-      }
-      else{
-        return error
-      }
+      const data = await this.graphqlService.executeQuery(query);
+      this._setCacheSchedule(params , data)
     } catch (error) {
       console.log(params ,error);
     }

@@ -37,8 +37,26 @@ const GetActiveBookings = (vendorId: any) => {
     }}`;
 };
 
+
+const GetServiceList = () => {
+  return `query {
+            service_details {
+              sid,
+              name,
+              description,
+              duration,
+              is_active,
+              price,
+              ratings,
+              reviews_count,
+              share_amount
+            }
+          }`;
+};
+
 export {
   GetVendorsList,
   GetVendorProfiles,
-  GetActiveBookings
+  GetActiveBookings,
+  GetServiceList
 };
