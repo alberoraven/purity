@@ -23,7 +23,7 @@
               <ion-avatar slot="start">
                 <img [src]="speaker.profilePic" [alt]="speaker.name + ' profile picture'">
               </ion-avatar>
-              <ion-label>
+              <ion-label class="purity-text-label">
                 <h2>{{speaker.name}}</h2>
                 <p>{{speaker.title}}</p>
               </ion-label>
@@ -33,13 +33,13 @@
           <ion-card-content>
             <ion-list lines="none">
               <ion-item *ngFor="let session of speaker.sessions" detail="false" routerLink="/app/tabs/speakers/session/{{session.id}}">
-                <ion-label>
+                <ion-label class="purity-text-label">
                   <h3>{{session.name}}</h3>
                 </ion-label>
               </ion-item>
 
               <ion-item detail="false" routerLink="/app/tabs/speakers/speaker-details/{{speaker.id}}">
-                <ion-label>
+                <ion-label class="purity-text-label">
                   <h3>About {{speaker.name}}</h3>
                 </ion-label>
               </ion-item>

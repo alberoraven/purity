@@ -26,20 +26,9 @@ export class SevicesProvider {
     return this.serviceCache.get(`services`);
   }
 
-  async serviceListGraphql() {
+  async serviceListGraphql(query: any) {
     try {
-      const services = `service_details {
-                            sid,
-                            name,
-                            description,
-                            duration,
-                            is_active,
-                            price,
-                            ratings,
-                            reviews_count,
-                            share_amount
-                        }`
-        const servicesList = await this.graphqlService.executeQuery(services);
+        const servicesList = await this.graphqlService.executeQuery(query);
         this._setCacheServices(servicesList?.service_details);
         return servicesList?.service_details;
     } catch (error) {

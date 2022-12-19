@@ -101,8 +101,15 @@ $border: $border-size $border-type $border-color;
 }
 
 .purity {
-  &-text-input > input {
-    @include purity-text-input;
+  &-text {
+    &-input > input {
+      @include purity-text-input;
+      margin-bottom: 10px;
+    }
+    &-label {
+      font-size: 18px !important;
+      padding-bottom: 10px;
+    }
   }
   &-button-primary {
     @include purity-button-primary;

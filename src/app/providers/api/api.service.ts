@@ -6,13 +6,11 @@ export class GraphqlService {
   constructor() { }
 
   async executeQuery(query: any) {
-    const requestQuery = gql`
-                            query MyQuery {
-                                ${query}
-                            }
-                        `
+    const requestQuery = gql`${query}`;
     const { data, error } = await nhost.graphql.request(requestQuery);
-    if (data) return data; else error;
+    console.log(data);
+    
+    if (data) return { ...data }; else error;
   }
 
 }

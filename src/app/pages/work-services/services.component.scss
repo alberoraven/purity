@@ -12,39 +12,63 @@ ion-toolbar {
 .pservice-header {
   position: relative;
   width: 100%;
-  height: 30%;
-  background-color: #000;
+  // height: 30%;
+  height: 60%;
+  background-color: #fff;
 }
 
 .pservice-header .pservice-image {
   position: absolute;
-
   top: 0;
   left: 0;
   bottom: 0;
   right: 0;
-
-  background-position: center;
-  background-size: cover;
-  background-repeat: no-repeat;
-
-  opacity: 0;
-
+  margin: 8px;
+  opacity: 1;
   transition: opacity 500ms ease-in-out;
+  background: url('../../../assets/img/service-bg.jpg') no-repeat center fixed;
+  background-size: cover;
+  border-radius: 15px;
 }
 
-.pservice-header .madison {
-background-image: url('../../../assets/img/about/madison.jpg');
+.pservice-detail {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
 }
-.pservice-header .austin {
-background-image: url('../../../assets/img/about/austin.jpg');
-}
-.pservice-header .chicago {
-background-image: url('../../../assets/img/about/chicago.jpg');
-}
-.pservice-header .seattle {
-background-image: url('../../../assets/img/about/seattle.jpg');
-}
+
+.pservice-text {
+  margin-bottom: 0;
+  padding: 30px;
+  text-align: center;
+  color: #000;
+  box-shadow: 0px 0px 10px #00000029;
+  border-radius: 15px;
+  background: url('../../../assets/img/card-bg3.webp') center no-repeat fixed;
+  background-size: cover;
+  strong {
+    font-size: 24px;
+  }
+  span {
+    display: flex;
+    justify-content: center;
+    padding-top: 8px;
+    font-size: 18px;
+  }
+ }
+
+// .pservice-header .madison {
+// background-image: url('../../../assets/img/about/madison.jpg');
+// }
+// .pservice-header .austin {
+// background-image: url('../../../assets/img/about/austin.jpg');
+// }
+// .pservice-header .chicago {
+// background-image: url('../../../assets/img/about/chicago.jpg');
+// }
+// .pservice-header .seattle {
+// background-image: url('../../../assets/img/about/seattle.jpg');
+// }
 
 .pservice-info {
   position: absolute;
