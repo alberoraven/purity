@@ -4,15 +4,10 @@
         <ion-buttons slot="start">
           <ion-menu-button></ion-menu-button>
         </ion-buttons>
-        <ion-buttons slot="end">
-          <ion-button (click)="presentPopover($event)">
-            <ion-icon slot="icon-only" ios="ellipsis-horizontal" md="ellipsis-vertical"></ion-icon>
-          </ion-button>
-        </ion-buttons>
       </ion-toolbar>
     </ion-header>
   
-    <div class="pservice-header">
+    <div class="pservice-header" *ngIf="service">
       <!-- Instead of loading an image each time the select changes, use opacity to transition them -->
       <div class="pservice-image madison" [ngStyle]="location === 'madison' && {'opacity': '1'}"></div>
       <div class="pservice-image austin" [ngStyle]="location === 'austin' && {'opacity': '1'}"></div>
@@ -20,7 +15,7 @@
       <div class="pservice-image seattle" [ngStyle]="location === 'seattle' && {'opacity': '1'}"></div>
     </div>
   
-    <div class="pservice-info">
+    <div class="pservice-info" *ngIf="service">
       <h3 class="ion-padding-top ion-padding-start">{{ service?.name | uppercase }} SERVICE</h3>
       <div class="pservice-detail">
         <ion-grid>
@@ -72,10 +67,19 @@
           <ion-label class="purity-text-label">
             Date
           </ion-label>
-          <ion-text slot="end">{{ conferenceDate | date: 'mediumDate' }}</ion-text>
+          <ion-text slot="end">{{ selectedDate | date: 'mediumDate' }}</ion-text>
           <ion-popover id="date-input-popover" trigger="open-date-input" [showBackdrop]="false" side="top" alignment="end">
             <ng-template>
-              <ion-datetime formControlName="slotdate" max="2056" presentation="date"></ion-datetime>
+              <ion-datetime #date 
+                formControlName="slotdate"
+                max="2056"
+                [isDateEnabled]="isPresentDate"
+                [min]="minDate"
+                [value]="selectedDate"
+                presentation="date"
+                [showDefaultButtons]="true"
+                (ionChange)="changeDate(date.value)"
+              ></ion-datetime>
             </ng-template>
           </ion-popover>
         </ion-item>

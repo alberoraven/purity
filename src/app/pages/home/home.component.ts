@@ -49,7 +49,7 @@ export class HomeComponent implements OnInit {
   }
 
   onClickService(event) {
-    this.router.navigate(['service'], { state: event });
+    this.router.navigate([`service/${event.sid}`], { state: event });
   }
 
 

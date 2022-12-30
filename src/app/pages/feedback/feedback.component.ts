@@ -50,14 +50,6 @@ export class FeedbackComponent implements OnInit {
     this.bookingForm.controls['slotdate'].setValue(moment(new Date()).format('YYYY-MM-DD'));
   }
 
-  async presentPopover(event: Event) {
-    const popover = await this.popoverCtrl.create({
-      component: PopoverPage,
-      event
-    });
-    await popover.present();
-  }
-
   ngOnInit(): void { }
 
   onbookingFormSubmit() {

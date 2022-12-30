@@ -42,7 +42,7 @@ const routes: Routes = [
     loadChildren: () => import('./pages/home/home.module').then(m => m.HomeModule),
   },
   {
-    path: 'service',
+    path: 'service/:id',
     loadChildren: () => import('./pages/work-services/services.module').then(m => m.ServicesModule),
   },
   {

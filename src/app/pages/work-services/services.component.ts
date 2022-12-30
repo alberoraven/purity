@@ -1,14 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { IService } from '../../providers/service-data/service.modal';
-import { serviceBooking } from "../../@shared/queries";
-
-import { PopoverController } from '@ionic/angular';
-import { PopoverPage } from '../about-popover/about-popover';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import * as moment from 'moment';
-import { SevicesProvider } from '../../providers/service-data/service.data';
 
+import { serviceBooking, GetService } from "../../@shared/queries";
+import { UserData } from "../../providers/user-data";
 import { GraphqlService } from "../../providers/api/api.service";
 
 @Component({
@@ -18,9 +14,11 @@ import { GraphqlService } from "../../providers/api/api.service";
 })
 export class ServicesComponent implements OnInit {
   public graphqlService = new GraphqlService();
-  service: any;
+  public selectedDate;
+  public service: any;
 
-  conferenceDate = new Date();
+  initialDate = new Date();
+  minDate: string;
   locationList = [
     {
       name: 'Alwarpet',
@@ -44,54 +42,81 @@ export class ServicesComponent implements OnInit {
 
   constructor(
     private bookingFormBuilder: FormBuilder,
-    private router: Router, 
-    public popoverCtrl: PopoverController,
-    private _sevicesProvider: SevicesProvider,
+    private router: Router,
+    private userData: UserData,
     ) {
-
     const data = this.router?.getCurrentNavigation()?.extras?.state;
-    if (data) this.service = data; else this.router.navigate(['home']);
-
+    if (data) this.service = data; else this.getServiceDetails();
+    this.selectedDate = this.dateFormat(new Date())
+    this.minDate = this.selectedDate;
     this.bookingForm = this.bookingFormBuilder.group({
       locality: ['', [Validators.required]],
       slotdate: ['', [Validators.required,]]
     });
 
     this.bookingForm.controls['locality'].setValue('Alathur');
-    this.bookingForm.controls['slotdate'].setValue(moment(new Date()).format('YYYY-MM-DD'));
+    this.bookingForm.controls['slotdate'].setValue(this.selectedDate);
   }
 
-  async presentPopover(event: Event) {
-    const popover = await this.popoverCtrl.create({
-      component: PopoverPage,
-      event
-    });
-    await popover.present();
+  async getServiceDetails() {
+    let locPath = window.location.href.split('/');
+    let serviceId = locPath[locPath.length -1];
+    if (Number(serviceId)) {
+      try {
+        await this.graphqlService.executeQuery(GetService(locPath[locPath.length -1])).then(res => {
+          this.service = res?.service_details[0];
+        });
+      } catch (error) {
+        this.router.navigate(['home']);
+      }
+    } else {
+      this.router.navigate(['home']);
+    }
   }
 
-  ngOnInit(): void { 
-    // this.service = this._sevicesProvider.getserviceList();
-    // this._sevicesProvider.getserviceList().subscribe(res => {
-    //   console.log(res);
-    // })
-    
+  dateFormat(date: Date) {
+    return moment(date).format('YYYY-MM-DD');
+  }
+
+  changeDate(value: Date) {
+    this.selectedDate = value;
+  }
+
+  isPresentDate = (dateString: string) => {
+    const date = new Date(dateString);
+    const currentDate = new Date();
+    const utcYear = date.getUTCFullYear();
+    const utcMonth = date.getUTCMonth() + 1;
+    const utcDate = date.getUTCDate();
+    const utcCurrentYear = currentDate.getUTCFullYear();
+    const utcCurrentMonth = currentDate.getUTCMonth() + 1;
+    const utcCurrentDate = currentDate.getUTCDate();
+    if (utcCurrentYear === utcYear) {
+      return utcCurrentYear === utcYear && utcMonth >= utcCurrentMonth && utcDate >= utcCurrentDate; 
+    } else if (utcCurrentYear < utcYear) {
+      return  utcCurrentYear < utcYear;
+    }
+  };
+
+  ngOnInit(): void { }
+
+  ionViewWillLeave() { 
+    document.querySelectorAll("ion-datetime")[0]?.cancel(true);
   }
 
   async onbookingFormSubmit() {
-    if (!this.bookingForm.invalid && this.service.is_active) {
-      let formValue = JSON.stringify(this.bookingForm.value);
+    if ((!this.bookingForm.invalid) && this.service.is_active) {
       try {
-        let sid = this.service.sid;
-        let uid = "301a04ee-e81b-4270-addc-847952703a9d";
-        let sdate = this.bookingForm.value.slotdate;
-        let status = "1";
-        console.log(sid, uid, sdate, status);
-        const data = await this.graphqlService.executeQuery(serviceBooking(uid, sid, sdate, status));
-        
+        await this.userData.getUserCredentials().then(async (res: any) => {
+          let sid = this.service.sid;
+          let uid = res?.id;
+          let sdate = this.bookingForm.value.slotdate;
+          let status = "1";
+          const data = await this.graphqlService.executeQuery(serviceBooking(uid, sid, sdate, status));
+        })
       } catch (error) {
         console.log(error);
       }
-      console.log(formValue, this.service);
     }
   }
 

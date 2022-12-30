@@ -53,7 +53,24 @@ const GetServiceList = () => {
             }
           }`;
 };
-//service_id: "3", status: "2", user_id: "301a04ee-e81b-4270-addc-847952703a9d", service_date: "2022-12-08"
+
+const GetService = (serviceId: string) => {
+  return `query {
+            service_details(where: {sid: {_eq: "${serviceId}"}}) {
+              sid,
+              name,
+              description,
+              duration,
+              is_active,
+              price,
+              ratings,
+              reviews_count,
+              share_amount
+            }
+          }
+        `;
+}
+
 const serviceBooking = (uid: string, sid: string, sdate: string, status: string) => {
   return `mutation {
             insert_active_bookings(objects: {service_id: "${sid}", status: "${status}", user_id: "${uid}", service_date: "${sdate}"}) {
@@ -76,5 +93,6 @@ export {
   GetVendorProfiles,
   GetActiveBookings,
   GetServiceList,
-  serviceBooking
+  serviceBooking,
+  GetService
 };
